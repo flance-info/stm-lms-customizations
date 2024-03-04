@@ -2,6 +2,8 @@
 /**
  * @var $bundle_id
  */
+use MasterStudy\Lms\Pro\addons\CourseBundle\Repository\CourseBundleRepository;
+use MasterStudy\Lms\Pro\addons\CourseBundle\Repository\CourseBundleSettings;
 
 if ( ! is_user_logged_in() ) {
 	STM_LMS_User::js_redirect( STM_LMS_User::login_page_url() );
@@ -38,7 +40,7 @@ $bundle_data = '';
 
 if ( ! empty( $bundle_id ) ) {
 
-	$bundle_data = STM_LMS_My_Bundle::get_bundle_data( $bundle_id );
+	$bundle_data = ( new CourseBundleRepository() )->get_bundle_data( $bundle_id );
 
     $bundle_data->bundle_point_price = intval( get_post_meta( $bundle_id, 'bundle_point_price', true ) );
 
