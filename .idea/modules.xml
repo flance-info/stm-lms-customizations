@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../masterstudy-lms-learning-management-system-pro/.idea/masterstudy-lms-learning-management-system-pro.iml" filepath="$PROJECT_DIR$/../masterstudy-lms-learning-management-system-pro/.idea/masterstudy-lms-learning-management-system-pro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/stm-lms-customizations.iml" filepath="$PROJECT_DIR$/.idea/stm-lms-customizations.iml" />
+    </modules>
+  </component>
+</project>

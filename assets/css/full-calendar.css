@@ -1,0 +1,91 @@
+.fc td, .fc th {
+    background-color: #fff;
+    color: #0086CD;
+}
+.fc td a.fc-daygrid-day-number, .fc th a.fc-col-header-cell-cushion {
+    color: inherit;
+}
+.fc .fc-col-header {
+    margin-bottom: 0;
+}
+.fc .fc-scrollgrid-sync-table {
+    margin-bottom: 0;
+}
+.fc .fc-button {
+    min-height: 40px;
+}
+.fc .fc-event {
+    padding: 2px 5px;
+    background-color: #0086CD;
+    color: #fff;
+    cursor: pointer;
+}
+.fc .fc-event:hover {
+    background-color: #0075bc;
+    color: #fff;
+}
+.fc .fc-event .fc-daygrid-event-dot {
+    display: none;
+}
+
+.fc .fc-button-primary {
+    background-color: #0086CD;
+    border-color: #0086CD;
+}
+
+.slms-calendar.fc {
+    margin-bottom: 80px;
+}
+.slms-calendar.fc .fc-daygrid-event-harness:hover,
+.slms-calendar.fc .fc-event:hover {
+    z-index: 9;
+}
+.slms-calendar-popup {
+    position: absolute;
+    top: 100%;
+    min-width: 380px;
+    cursor: initial;
+    z-index: 9;
+}
+.slms-calendar-popup .stm_lms_courses__single--info {
+    top: 10px;
+    left: -25%;
+    right: 25%;
+    visibility: visible;
+    opacity: 1;
+    padding: 25px 30px 15px;
+}
+
+.slms-calendar-popup .stm_lms_courses__single--progress_bar {
+    margin: 0 0 20px;
+    position: relative;
+    height: 5px;
+    background-color: #e0e0e0;
+}
+.slms-calendar-popup .stm_lms_courses__single--progress_filled {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #040507;
+}
+.slms-calendar-popup .stm_lms_courses__single--info_excerpt {
+    white-space: break-spaces;
+    line-height: 21px;
+}
+
+.slms-calendar-popup .slms-material-item {
+    display: flex;
+    justify-content: space-between;
+}
+.slms-calendar-popup .slms-material-date {
+    color: #000;
+}
+
+.slms-calendar.fc .fc-scroller-harness {
+    overflow: visible;
+}
+.slms-calendar-popup .stm_lms_courses__single--info_title {
+    white-space: break-spaces;
+}

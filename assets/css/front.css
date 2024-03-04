@@ -1,0 +1,9 @@
+.single_product_after_title .stm_lms_teachers {
+    flex-flow: wrap;
+}
+.single_product_after_title .stm_lms_teachers a {
+    margin-bottom: 10px;
+}
+.stm-lms-wrapper.stm_lms_udemy_course .stm_lms_udemy_bar .single_product_after_title {
+    align-items: start;
+}
