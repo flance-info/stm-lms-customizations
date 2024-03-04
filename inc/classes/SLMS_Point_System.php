@@ -1,4 +1,5 @@
 <?php
+use MasterStudy\Lms\Pro\addons\CourseBundle\Repository\CourseBundleRepository;
 
 class SLMS_Point_System {
     public function __construct() {
@@ -23,7 +24,7 @@ class SLMS_Point_System {
                 'url' => get_the_permalink( $bundle_id ),
             );
 
-            $courses = get_post_meta( $bundle_id, STM_LMS_My_Bundle::bundle_courses_key(), true );
+            $courses = get_post_meta( $bundle_id, CourseBundleRepository::PRICE_META_KEY, true );
 
             $url = '';
 

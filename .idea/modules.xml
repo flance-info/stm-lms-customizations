@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../../2kind/wp-content/plugins/masterstudy-lms-learning-management-system-pro/addons/course_bundle/.idea/course_bundle.iml" filepath="$PROJECT_DIR$/../../../../2kind/wp-content/plugins/masterstudy-lms-learning-management-system-pro/addons/course_bundle/.idea/course_bundle.iml" />
       <module fileurl="file://$PROJECT_DIR$/../masterstudy-lms-learning-management-system-pro/.idea/masterstudy-lms-learning-management-system-pro.iml" filepath="$PROJECT_DIR$/../masterstudy-lms-learning-management-system-pro/.idea/masterstudy-lms-learning-management-system-pro.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/stm-lms-customizations.iml" filepath="$PROJECT_DIR$/.idea/stm-lms-customizations.iml" />
     </modules>
