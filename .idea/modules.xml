@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../../../../2kind/wp-content/plugins/masterstudy-lms-learning-management-system-pro/addons/course_bundle/.idea/course_bundle.iml" filepath="$PROJECT_DIR$/../../../../2kind/wp-content/plugins/masterstudy-lms-learning-management-system-pro/addons/course_bundle/.idea/course_bundle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../themes/masterstudy/.idea/masterstudy.iml" filepath="$PROJECT_DIR$/../../themes/masterstudy/.idea/masterstudy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../masterstudy-elementor-widgets/.idea/masterstudy-elementor-widgets.iml" filepath="$PROJECT_DIR$/../masterstudy-elementor-widgets/.idea/masterstudy-elementor-widgets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../masterstudy-lms-learning-management-system/.idea/masterstudy-lms-learning-management-system.iml" filepath="$PROJECT_DIR$/../masterstudy-lms-learning-management-system/.idea/masterstudy-lms-learning-management-system.iml" />
       <module fileurl="file://$PROJECT_DIR$/../masterstudy-lms-learning-management-system-pro/.idea/masterstudy-lms-learning-management-system-pro.iml" filepath="$PROJECT_DIR$/../masterstudy-lms-learning-management-system-pro/.idea/masterstudy-lms-learning-management-system-pro.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../themes/new_masterstudy-child/.idea/new_masterstudy-child.iml" filepath="$PROJECT_DIR$/../../themes/new_masterstudy-child/.idea/new_masterstudy-child.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/stm-lms-customizations.iml" filepath="$PROJECT_DIR$/.idea/stm-lms-customizations.iml" />

@@ -7,5 +7,9 @@
     <orderEntry type="module" module-name="masterstudy-lms-learning-management-system-pro" />
     <orderEntry type="module" module-name="course_bundle" />
     <orderEntry type="module" module-name="new_masterstudy-child" />
+    <orderEntry type="module" module-name="masterstudy" />
+    <orderEntry type="module" module-name="masterstudy-elementor-widgets" />
+    <orderEntry type="module" module-name="masterstudy-lms-learning-management-system" />
+    <orderEntry type="module" module-name="masterstudy-lms-learning-management-system-pro" />
   </component>
 </module>
