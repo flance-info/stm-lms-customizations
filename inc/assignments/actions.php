@@ -259,7 +259,7 @@ class CustomAssignmentMetaboxes {
 						<div class="row">
 							<div class="column column-match">
 								<div class="border">
-									<input name="attempts" type="number" placeholder="<?php esc_attr_e( 'Assignment attempts', 'slms' ); ?>" value="<?php echo esc_attr( $total_attempts ) ?>"/>
+									<input name="assignment_tries" type="number" placeholder="<?php esc_attr_e( 'Assignment attempts', 'slms' ); ?>" value="<?php echo esc_attr( $total_attempts ) ?>"/>
 								</div>
 							</div>
 						</div>
