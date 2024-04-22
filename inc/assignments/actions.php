@@ -21,6 +21,9 @@ class CustomAssignmentMetaboxes {
 		add_action( 'add_meta_boxes', array( $this, 'add_assignments_metaboxes' ), 20 );
 		add_action( 'save_post', array( $this, 'save_student_assignment_meta' ), 10, 2 );
 		add_action( 'save_post', array( $this, 'save_assignment_meta' ), 10, 2 );
+		add_filter( 'manage_stm-user-assignment_posts_columns', array( $this, 'masterstudy_lms_student_assignments_columns' ) );
+		add_filter( 'manage_edit-stm-user-assignment_sortable_columns', array( $this, 'masterstudy_lms_student_assignments_columns' ), 11 );
+		add_action( 'manage_stm-user-assignment_posts_custom_column', array( $this, 'stm_lms_student_assignments_column_fields' ), 11, 2 );
 	}
 
 	public function add_student_assignments_metaboxes() {
@@ -31,6 +34,35 @@ class CustomAssignmentMetaboxes {
 				'stm-user-assignment',
 				'normal'
 		);
+	}
+
+	public function masterstudy_lms_student_assignments_columns( $columns ) {
+		unset( $columns['lms_status'] );
+		$columns = $this->reorder_columns( $columns );
+
+		return $columns;
+	}
+
+	public function stm_lms_student_assignments_column_fields( $columns, $assignment_id ) {
+		switch ( $columns ) {
+			case 'lms_grade':
+				$grade       = get_post_meta( $assignment_id, 'grade', true );
+				echo ($grade)? $grade: 'pending';
+				break;
+
+		}
+	}
+
+	public static function reorder_columns( $columns ) {
+		$new_columns = [];
+		foreach ( $columns as $key => $value ) {
+			$new_columns[ $key ] = $value;
+			if ( $key === 'lms_attempt' ) {
+				$new_columns['lms_grade'] = esc_html__( 'Grade', 'slms' );
+			}
+		}
+
+		return $new_columns;
 	}
 
 	public function add_assignments_metaboxes() {
@@ -47,10 +79,9 @@ class CustomAssignmentMetaboxes {
 		if ( PostType::USER_ASSIGNMENT !== $post->post_type ) {
 			return;
 		}
-		// Save student assessment meta field
-		if ( isset( $_POST['assessment'] ) ) {
-			$assessment = sanitize_text_field( $_POST['assessment'] );
-			update_post_meta( $post_id, 'assessment', $assessment );
+		if ( isset( $_POST['grade'] ) ) {
+			$assessment = sanitize_text_field( $_POST['grade'] );
+			update_post_meta( $post_id, 'grade', $assessment );
 		}
 	}
 
@@ -68,7 +99,7 @@ class CustomAssignmentMetaboxes {
 	public function student_assignment_review( $post ) {
 		wp_nonce_field( 'stm_lms_assignment_instructor_review_save', 'stm_lms_assignment_instructor_review' );
 		$status      = get_post_meta( $post->ID, 'status', true );
-		$assessment  = get_post_meta( $post->ID, 'assessment', true );
+		$grade       = get_post_meta( $post->ID, 'grade', true );
 		$review      = get_post_meta( $post->ID, 'editor_comment', true );
 		$post_status = get_post_status( $post->ID );
 		if ( 'pending' === $post_status ) {
@@ -84,7 +115,7 @@ class CustomAssignmentMetaboxes {
 						<div class="row">
 							<div class="column column-match">
 								<div class="border">
-									<input name="assessment" type="number" placeholder="<?php esc_attr_e( 'Assessment', 'slms' ); ?>" value="<?php echo esc_attr( $assessment ) ?>"/>
+									<input name="grade" type="number" placeholder="<?php esc_attr_e( 'Grade', 'slms' ); ?>" value="<?php echo esc_attr( $grade ) ?>"/>
 								</div>
 							</div>
 						</div>
