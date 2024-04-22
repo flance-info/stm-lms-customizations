@@ -18,7 +18,9 @@ class CustomAssignmentMetaboxes {
 	public function __construct() {
 		add_action( 'add_meta_boxes', array( $this, 'remove_instructor_review_metabox' ), 11 );
 		add_action( 'add_meta_boxes', array( $this, 'add_student_assignments_metaboxes' ), 20 );
-		add_action('save_post', array($this, 'save_assignment_meta'), 10, 2);
+		add_action( 'add_meta_boxes', array( $this, 'add_assignments_metaboxes' ), 20 );
+		add_action( 'save_post', array( $this, 'save_student_assignment_meta' ), 10, 2 );
+		add_action( 'save_post', array( $this, 'save_assignment_meta' ), 10, 2 );
 	}
 
 	public function add_student_assignments_metaboxes() {
@@ -31,21 +33,42 @@ class CustomAssignmentMetaboxes {
 		);
 	}
 
-	public function save_assignment_meta( $post_id, $post ) {
+	public function add_assignments_metaboxes() {
+		add_meta_box(
+				'stm_lms_assignment',
+				esc_html__( 'Attempts', 'slms' ),
+				array( $this, 'assignment_attempts' ),
+				'stm-assignments',
+				'normal'
+		);
+	}
+
+	public function save_student_assignment_meta( $post_id, $post ) {
 		if ( PostType::USER_ASSIGNMENT !== $post->post_type ) {
 			return;
 		}
-		// Save assessment meta field
+		// Save student assessment meta field
 		if ( isset( $_POST['assessment'] ) ) {
 			$assessment = sanitize_text_field( $_POST['assessment'] );
 			update_post_meta( $post_id, 'assessment', $assessment );
 		}
 	}
 
+	public function save_assignment_meta( $post_id, $post ) {
+		if ( PostType::ASSIGNMENT !== $post->post_type ) {
+			return;
+		}
+		// Save assessment meta field
+		if ( isset( $_POST['assignment_tries'] ) ) {
+			$assessment = sanitize_text_field( $_POST['assignment_tries'] );
+			update_post_meta( $post_id, 'assignment_tries', $assessment );
+		}
+	}
+
 	public function student_assignment_review( $post ) {
 		wp_nonce_field( 'stm_lms_assignment_instructor_review_save', 'stm_lms_assignment_instructor_review' );
 		$status      = get_post_meta( $post->ID, 'status', true );
-		$assessment = get_post_meta( $post->ID, 'assessment', true );
+		$assessment  = get_post_meta( $post->ID, 'assessment', true );
 		$review      = get_post_meta( $post->ID, 'editor_comment', true );
 		$post_status = get_post_status( $post->ID );
 		if ( 'pending' === $post_status ) {
@@ -61,13 +84,13 @@ class CustomAssignmentMetaboxes {
 						<div class="row">
 							<div class="column column-match">
 								<div class="border">
-									<input name="assessment" type="number" placeholder="<?php esc_attr_e( 'Assessment', 'slms' ); ?>" value="<?php echo esc_attr($assessment) ?>"/>
+									<input name="assessment" type="number" placeholder="<?php esc_attr_e( 'Assessment', 'slms' ); ?>" value="<?php echo esc_attr( $assessment ) ?>"/>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<br />
+				<br/>
 				<?php
 				STM_LMS_Templates::show_lms_template(
 						'components/wp-editor',
@@ -221,6 +244,31 @@ class CustomAssignmentMetaboxes {
 
 	public function remove_instructor_review_metabox() {
 		remove_meta_box( 'stm_lms_assignment_instructor_review', 'stm-user-assignment', 'normal' );
+	}
+
+	public function assignment_attempts( $post ) {
+		wp_nonce_field( 'stm_lms_assignment_instructor_review_save', 'stm_lms_assignment_instructor_review' );
+		$total_attempts = STM_LMS_Assignments::attempts_num( $post->ID );
+		?>
+		<div class="masterstudy-assignment__metafields">
+			<div class="masterstudy-assignment__instructor-review">
+				<h2><?php echo esc_html__( 'Assignment attempts', 'slms' ); ?>:</h2>
+
+				<div class="stm-lms-questions-single_input mb-3">
+					<div class="container">
+						<div class="row">
+							<div class="column column-match">
+								<div class="border">
+									<input name="attempts" type="number" placeholder="<?php esc_attr_e( 'Assignment attempts', 'slms' ); ?>" value="<?php echo esc_attr( $total_attempts ) ?>"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<?php
 	}
 }
 
