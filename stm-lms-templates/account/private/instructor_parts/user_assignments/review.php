@@ -25,6 +25,27 @@ $grade       = get_post_meta( $assignment_id, 'grade', true );
 	</div>
 	<br/>
 	<?php
+
+	STM_LMS_Templates::show_lms_template(
+		'components/radio-buttons',
+		array(
+			'name'  => 'status',
+			'items' => array(
+				array(
+					'value'   => 'passed',
+					'label'   => esc_html__( 'Passed', 'masterstudy-lms-learning-management-system-pro' ),
+					'checked' => 'passed' === $assignment_status,
+					'style'   => 'success',
+				),
+				array(
+					'value'   => 'not_passed',
+					'label'   => esc_html__( 'Failed', 'masterstudy-lms-learning-management-system-pro' ),
+					'checked' => 'not_passed' === $assignment_status,
+					'style'   => 'danger',
+				),
+			),
+		)
+	);
 	STM_LMS_Templates::show_lms_template(
 		'components/wp-editor',
 		array(
