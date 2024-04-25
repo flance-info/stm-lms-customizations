@@ -1,5 +1,8 @@
 <?php
 
+use MasterStudy\Lms\Pro\addons\certificate_builder\CertificateRepository;
+use MasterStudy\Lms\Pro\addons\certificate_builder\Http\Controllers\AjaxController;
+
 class SLMS_Certificate_Builder {
 
     public function __construct(){
@@ -41,56 +44,33 @@ class SLMS_Certificate_Builder {
         check_ajax_referer( 'stm_get_certificate', 'nonce' );
 
         $id        = '';
-        $course_id = '';
 
-        if ( ! empty( $_GET['course_id'] ) && $_GET['course_id'] ) {
-            $course_id      = intval( $_GET['course_id'] );
-            $certificate_id = get_post_meta( $course_id, 'course_certificate', true );
+		$course_id = filter_input( INPUT_GET, 'course_id', FILTER_SANITIZE_NUMBER_INT );
 
-            if ( ! empty( $certificate_id ) ) {
-                $id = $certificate_id;
-            } else {
-                $terms      = wp_get_post_terms( $course_id, 'stm_lms_course_taxonomy', array( 'fields' => 'ids' ) );
-                $meta_query = array(
-                    'relation' => 'OR',
-                );
+		$repo = $this->get_repository();
+		if ( $course_id ) {
+			$id = get_post_meta( $course_id, 'course_certificate', true );
 
-                foreach ( $terms as $term ) {
-                    $meta_query[] = array(
-                        'key'   => 'stm_category',
-                        'value' => $term,
-                    );
-                }
+			if ( ! $id ) {
+				$terms = wp_get_post_terms( $course_id, 'stm_lms_course_taxonomy', array( 'fields' => 'ids' ) );
+				$id    = $repo->get_first_for_categories( $terms );
+			}
+		}
 
-                $meta_query[] = array(
-                    'key'   => 'stm_category',
-                    'value' => 'entire_site',
-                );
-                $args         = array(
-                    'post_type'      => 'stm-certificates',
-                    'posts_per_page' => 1,
-                    'meta_query'     => $meta_query,
-                    'meta_key'       => 'stm_category',
-                    'orderby'        => 'meta_value',
-                    'order'          => 'ASC',
-                );
+		if ( empty( $id ) ) {
+			$id = filter_input( INPUT_GET, 'post_id', FILTER_SANITIZE_NUMBER_INT );
+		}
 
-                $query = new WP_Query( $args );
+		if ( empty( $id ) ) {
+			return;
+		}
 
-                if ( $query->have_posts() ) {
-                    while ( $query->have_posts() ) {
-                        $query->the_post();
-                        $id = get_the_ID();
-                    }
-                }
+        $certificate['course_id'] = $course_id;
 
-                wp_reset_postdata();
-            }
-        }
+		if ( empty( $certificate['orientation'] ) ) {
+			$certificate['orientation'] = 'landscape';
+		}
 
-        if ( empty( $id ) && ! empty( $_GET['post_id'] ) ) {
-            $id = intval( $_GET['post_id'] );
-        }
 
         if ( ! empty( $id ) ) {
             $certificate     = array();
@@ -186,7 +166,7 @@ class SLMS_Certificate_Builder {
                 } elseif ( 'code' === $field['type'] && ! empty( $course_id ) ) {
                     $field['content'] = get_post_meta( $id, 'code', true );
                 } elseif ( 'student_code' === $field['type'] && ! empty( $course_id ) ) {
-                    $field['content'] = STM_LMS_Certificates::generate_certificate_user_code( $current_user_id, $course_id );
+                    $field['content'] = STM_LMS_Certificates::generate_certificate_code( $current_user_id, $course_id );
                 } else {
                     $field['content'] = self::generate_certificate_field( $field['type'], $current_user_id, $course_id );
                 }
@@ -199,6 +179,7 @@ class SLMS_Certificate_Builder {
                 'orientation' => $orientation,
                 'fields'      => $fields_with_data,
                 'image'       => $base64,
+				'thumbnail'   => $base64,
                 'image_size'  => $image_size,
             );
             $certificate['data'] = $data;
@@ -206,6 +187,10 @@ class SLMS_Certificate_Builder {
             wp_send_json( $certificate );
         }
     }
+
+	private function get_repository(): CertificateRepository {
+		return new CertificateRepository();
+	}
 
 }
 
