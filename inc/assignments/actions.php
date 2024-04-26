@@ -11,7 +11,10 @@ use MasterStudy\Lms\Pro\addons\assignments\Repositories\AssignmentStudentReposit
 use MasterStudy\Lms\Pro\addons\assignments\Repositories\AssignmentTeacherRepository;
 use MasterStudy\Lms\Repositories\CurriculumRepository;
 use STM_LMS_Assignments;
+use STM_LMS_Helpers;
+use STM_LMS_Instructor;
 use STM_LMS_Templates;
+use STM_LMS_User;
 
 class CustomAssignmentMetaboxes {
 
@@ -25,6 +28,8 @@ class CustomAssignmentMetaboxes {
 		add_filter( 'manage_edit-stm-user-assignment_sortable_columns', array( $this, 'masterstudy_lms_student_assignments_columns' ), 11 );
 		add_action( 'manage_stm-user-assignment_posts_custom_column', array( $this, 'stm_lms_student_assignments_column_fields' ), 11, 2 );
 		add_action( 'wp_enqueue_scripts', array($this, 'enqueue_script_styles'), 15 );
+		remove_action( 'wp_ajax_stm_lms_assignment_student_answer', 'stm_lms_assignment_student_answer' );
+		add_action( 'wp_ajax_stm_lms_assignment_student_answer', array($this, 'stm_lms_assignment_student_answer') );
 	}
 
 	 public function enqueue_script_styles(){
@@ -34,6 +39,52 @@ class CustomAssignmentMetaboxes {
             wp_register_script( 'masterstudy-attachment-media', SLMS_URL . 'assets/js/components/attachment-media.js', array( 'jquery'), time(), true );
         }
     }
+
+	public function stm_lms_assignment_student_answer() {
+	check_ajax_referer( 'wp_rest', 'nonce' );
+
+	$status        = sanitize_text_field( $_POST['status'] );
+	$review        = wp_kses_post( $_POST['review'] );
+	$assignment_id = intval( $_POST['assignment_id'] );
+	$grade = intval( $_POST['grade'] );
+
+	$student_id = get_post_meta( $assignment_id, 'student_id', true );
+	$course_id  = get_post_meta( $assignment_id, 'course_id', true );
+
+	wp_update_post(
+		array(
+			'ID'          => $assignment_id,
+			'post_status' => 'publish',
+		)
+	);
+
+	update_post_meta( $assignment_id, 'editor_comment', $review );
+	update_post_meta( $assignment_id, 'status', $status );
+	update_post_meta( $assignment_id, 'who_view', 0 );
+	update_post_meta( $assignment_id, 'grade', $grade );
+
+	if ( 'passed' === $status ) {
+		STM_LMS_Course::update_course_progress( $student_id, $course_id );
+	}
+
+	if ( STM_LMS_Instructor::is_instructor() ) {
+		$student = STM_LMS_User::get_current_user( $student_id );
+
+		$message = esc_html__( 'Your assignment has been checked', 'masterstudy-lms-learning-management-system-pro' );
+		STM_LMS_Helpers::send_email(
+			$student['email'],
+			esc_html__( 'Assignment status change.', 'masterstudy-lms-learning-management-system-pro' ),
+			$message,
+			'stm_lms_assignment_checked',
+			compact( 'message' )
+		);
+	}
+
+	do_action( 'stm_lms_assignment_' . $status, $student_id, $assignment_id );
+
+	wp_send_json_success();
+}
+
 	public function add_student_assignments_metaboxes() {
 		add_meta_box(
 				'stm_lms_assignment_instructor_review',
