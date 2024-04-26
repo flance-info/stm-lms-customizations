@@ -36,3 +36,13 @@ function pre_die($var){
     pre_var($var);
     die();
 }
+
+function custom_logger($message) {
+    $log_file = SLMS_PATH . '/custom_log.txt';
+
+	 $message = print_r($message, true);
+	 $log_message = '[' . date('Y-m-d H:i:s') . '] ' . $message . "\n";
+    file_put_contents($log_file, $log_message, FILE_APPEND);
+}
+
+

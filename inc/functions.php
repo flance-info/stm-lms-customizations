@@ -15,6 +15,7 @@ require_once SLMS_PATH . '/inc/classes/SLMS_Courses_Visibility.php';
 require_once SLMS_PATH . '/inc/classes/SLMS_Course_Bundles.php';
 require_once SLMS_PATH . '/inc/certificates/SLMS_Manage_Certificates.php';
 require_once SLMS_PATH . '/inc/assignments/actions.php';
+require_once SLMS_PATH . '/inc/user_manager/UserManager.CourseUserCustom.php';
 
 
 add_action('wp_enqueue_scripts', function(){
