@@ -24,8 +24,16 @@ class CustomAssignmentMetaboxes {
 		add_filter( 'manage_stm-user-assignment_posts_columns', array( $this, 'masterstudy_lms_student_assignments_columns' ) );
 		add_filter( 'manage_edit-stm-user-assignment_sortable_columns', array( $this, 'masterstudy_lms_student_assignments_columns' ), 11 );
 		add_action( 'manage_stm-user-assignment_posts_custom_column', array( $this, 'stm_lms_student_assignments_column_fields' ), 11, 2 );
+		add_action( 'wp_enqueue_scripts', array($this, 'enqueue_script_styles'), 15 );
 	}
 
+	 public function enqueue_script_styles(){
+        $lms_template_current = get_query_var( 'lms_template' );
+        if($lms_template_current == 'stm-lms-user-assignment') {
+			wp_deregister_script( 'masterstudy-attachment-media' );
+            wp_register_script( 'masterstudy-attachment-media', SLMS_URL . 'assets/js/components/attachment-media.js', array( 'jquery'), time(), true );
+        }
+    }
 	public function add_student_assignments_metaboxes() {
 		add_meta_box(
 				'stm_lms_assignment_instructor_review',

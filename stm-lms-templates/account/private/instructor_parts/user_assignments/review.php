@@ -17,7 +17,7 @@ $grade       = get_post_meta( $assignment_id, 'grade', true );
 			<div class="row">
 				<div class="column column-match">
 					<div class="border">
-						<input name="grade" type="number" placeholder="<?php esc_attr_e( 'Grade', 'slms' ); ?>" value="<?php echo esc_attr( $grade ) ?>"/>
+						<input name="grade" type="number" class="masterstudy-assignment-input" placeholder="<?php esc_attr_e( 'Grade', 'slms' ); ?>" value="<?php echo esc_attr( $grade ) ?>"/>
 					</div>
 				</div>
 			</div>
@@ -25,27 +25,6 @@ $grade       = get_post_meta( $assignment_id, 'grade', true );
 	</div>
 	<br/>
 	<?php
-
-	STM_LMS_Templates::show_lms_template(
-		'components/radio-buttons',
-		array(
-			'name'  => 'status',
-			'items' => array(
-				array(
-					'value'   => 'passed',
-					'label'   => esc_html__( 'Passed', 'masterstudy-lms-learning-management-system-pro' ),
-					'checked' => 'passed' === $assignment_status,
-					'style'   => 'success',
-				),
-				array(
-					'value'   => 'not_passed',
-					'label'   => esc_html__( 'Failed', 'masterstudy-lms-learning-management-system-pro' ),
-					'checked' => 'not_passed' === $assignment_status,
-					'style'   => 'danger',
-				),
-			),
-		)
-	);
 	STM_LMS_Templates::show_lms_template(
 		'components/wp-editor',
 		array(
