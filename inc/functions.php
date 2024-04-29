@@ -17,6 +17,18 @@ require_once SLMS_PATH . '/inc/certificates/SLMS_Manage_Certificates.php';
 require_once SLMS_PATH . '/inc/assignments/actions.php';
 require_once SLMS_PATH . '/inc/user_manager/UserManager.CourseUserCustom.php';
 
+function load_user_assignment_class() {
+    $user_assignment_class_file = SLMS_PATH . '/inc/assignments/user_assignment.class.php';
+    if (file_exists($user_assignment_class_file)) {
+        require_once $user_assignment_class_file;
+    } else {
+        error_log('user_assignment.class.php file not found.');
+    }
+}
+
+add_action('init', 'load_user_assignment_class');
+
+
 
 add_action('wp_enqueue_scripts', function(){
 

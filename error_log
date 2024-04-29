@@ -1,4 +1,0 @@
-[22-Nov-2023 09:38:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function plugin_dir_url() in /home/macadmy/public_html/wp-content/plugins/stm-lms-customizations/index.php:14
-Stack trace:
-#0 {main}
-  thrown in /home/macadmy/public_html/wp-content/plugins/stm-lms-customizations/index.php on line 14
