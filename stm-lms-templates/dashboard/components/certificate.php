@@ -5,7 +5,7 @@
 ?>
 <transition name="slide">
 
-    <div class="stm-lms-dashboard-inner stm-lms-dashboard-course">
+    <div class="stm-lms-dashboard-inner stm-lms-dashboard-certificate">
 
         <div class="loading" v-if="loading"></div>
 
@@ -91,12 +91,18 @@
                                 <?php esc_html_e('Started', 'masterstudy-lms-learning-management-system'); ?>
                             </div>
                         </th>
+						<th class="certificate time">
+                            <div class="sort-certificate">
+                                <?php esc_html_e('Certificates', 'masterstudy-lms-learning-management-system'); ?>
+                            </div>
+                        </th>
+
                         <th class="progress_cell">
                             <div class="sort-table" @click="sortBy('progress')"
                                  v-bind:class="[sort === 'progress' ? 'active' : '', 'direction_' + sortDirection]">
                                 <i class="fa fa-long-arrow-alt-up"></i>
                                 <i class="fa fa-long-arrow-alt-down"></i>
-                                <?php esc_html_e('Progress', 'masterstudy-lms-learning-management-system'); ?>
+                                <?php esc_html_e('Grade', 'slms'); ?>
                             </div>
                         </th>
                         <th class="student_progress"></th>
@@ -123,14 +129,16 @@
                         <td class="email" v-html="list.student.email"></td>
 
                         <td v-html="list.ago" class="time"></td>
+							<td class="certificate" >
+								<button>Certificate</button>
+						</td>
+						<td v-html="list.ago" class="time"></td>
 
+						<td class="certificate" >
+								<button>Certificate</button>
+						</td>
                         <td class="progress_cell"  @click="toUser(id, list.user_id)">
                             <div class="progress-wrapper">
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-success"
-                                         v-bind:class="{'active progress-bar-striped' : list.progress_percent < 100}"
-                                         v-bind:style="{'width': list.progress_percent + '%'}"></div>
-                                </div>
                                 <div class="progress-label">{{list.progress_percent}}%</div>
                             </div>
                         </td>
@@ -138,7 +146,7 @@
                         <td class="student_progress">
                             <div class="goToProgress" @click="toUser(id, list.user_id)">
                                 <i class="fa fa-list"></i>
-                                <?php esc_html_e('Progress', 'masterstudy-lms-learning-management-system'); ?>
+                                <?php esc_html_e('Validate', 'slms'); ?>
                             </div>
                         </td>
 

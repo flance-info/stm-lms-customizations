@@ -1,16 +1,20 @@
-.stm-lms-dashboard-course .filters {
+.stm-lms-dashboard-course .filters,
+.stm-lms-dashboard-certificate .filters {
     display: flex;
     width: 30%;
     margin-left: auto;
     justify-content: flex-end;
 }
-.stm-lms-dashboard-course .filters select {
+.stm-lms-dashboard-course .filters select,
+.stm-lms-dashboard-certificate .filters select {
     height: 40px;
 }
-.stm-lms-dashboard-course .filters .filter-item {
+.stm-lms-dashboard-course .filters .filter-item,
+.stm-lms-dashboard-certificate .filters .filter-item {
     padding: 0 5px;
 }
-.stm-lms-dashboard-course .filters + .searchboxes {
+.stm-lms-dashboard-course .filters + .searchboxes,
+.stm-lms-dashboard-certificate .filters + .searchboxes {
     width: 30% !important;
     margin-left: initial !important;
 }
@@ -34,4 +38,34 @@
 
 .stm-display-flex .progress-wrapper{
     padding-top: 0px;
+}
+
+.stm-lms-dashboard-certificate .progress-wrapper {
+    padding: 0px;
+    margin: 0px;
+}
+
+#stm-lms-dashboard .stm-lms-dashboard-certificate
+.lms-dashboard-table tr .student_progress {
+    width: 150px;
+}
+
+#stm-lms-dashboard .stm-lms-dashboard-certificate .lms-dashboard-table tr td {
+    padding: 10px;
+    border-bottom: 0;
+}
+
+#stm-lms-dashboard .stm-lms-dashboard-certificate .lms-dashboard-table tr td .goToProgress {
+    opacity: 1;
+    visibility: visible;
+}
+#stm-lms-dashboard .stm-lms-dashboard-certificate .lms-dashboard-table tr .delete {
+    width: 20px;
+    text-align: right;
+}
+
+#stm-lms-dashboard .stm-lms-dashboard-certificate .lms-dashboard-table tr .delete i {
+    color: red;
+    cursor: pointer;
+    font-size: 16px;
 }
