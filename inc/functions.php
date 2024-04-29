@@ -18,12 +18,17 @@ require_once SLMS_PATH . '/inc/assignments/actions.php';
 require_once SLMS_PATH . '/inc/user_manager/UserManager.CourseUserCustom.php';
 
 function load_user_assignment_class() {
-    $user_assignment_class_file = SLMS_PATH . '/inc/assignments/user_assignment.class.php';
-    if (file_exists($user_assignment_class_file)) {
-        require_once $user_assignment_class_file;
-    } else {
-        error_log('user_assignment.class.php file not found.');
-    }
+	$custom_files = [
+		SLMS_PATH . '/inc/assignments/user_assignment.class.php',
+		SLMS_PATH . '/inc/user_manager/UserManager.InterfaceCustom.php'
+	];
+	foreach ( $custom_files as $custom_file ) {
+		if ( file_exists( $custom_file ) ) {
+			require_once $custom_file;
+		} else {
+			error_log( "$custom_file file not found." );
+		}
+	}
 }
 
 add_action('init', 'load_user_assignment_class');
