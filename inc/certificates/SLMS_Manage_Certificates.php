@@ -30,7 +30,7 @@ class SLMS_Manage_Certificates {
 		switch ( $columns ) {
 			case 'lms_course_certificates':
 				?>
-				<a href="<?php echo esc_url( admin_url( "?page=stm-lms-dashboard#/course/{$post_id}" ) ); ?>" class="button action">
+				<a href="<?php echo esc_url( admin_url( "?page=stm-lms-dashboard#/certifcate/{$post_id}" ) ); ?>" class="button action">
 					<?php esc_html_e( 'Manage Certifications', 'masterstudy-lms-learning-management-system' ); ?>
 				</a>
 				<?php
