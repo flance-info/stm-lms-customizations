@@ -1,71 +1,83 @@
 .stm-lms-dashboard-course .filters,
 .stm-lms-dashboard-certificate .filters {
-    display: flex;
-    width: 30%;
-    margin-left: auto;
-    justify-content: flex-end;
+	display: flex;
+	width: 30%;
+	margin-left: auto;
+	justify-content: flex-end;
 }
+
 .stm-lms-dashboard-course .filters select,
 .stm-lms-dashboard-certificate .filters select {
-    height: 40px;
+	height: 40px;
 }
+
 .stm-lms-dashboard-course .filters .filter-item,
 .stm-lms-dashboard-certificate .filters .filter-item {
-    padding: 0 5px;
+	padding: 0 5px;
 }
+
 .stm-lms-dashboard-course .filters + .searchboxes,
 .stm-lms-dashboard-certificate .filters + .searchboxes {
-    width: 30% !important;
-    margin-left: initial !important;
+	width: 30% !important;
+	margin-left: initial !important;
 }
 
 #stm_lms_form_builder input[type=date] {
-    width: 100%;
-    max-width: 100%;
-    border: 1px solid #8c99a5;
-    border-radius: 5px;
-    padding: 5px 15px;
+	width: 100%;
+	max-width: 100%;
+	border: 1px solid #8c99a5;
+	border-radius: 5px;
+	padding: 5px 15px;
 }
 
 .section_grade {
-    margin-right: 10px;
+	margin-right: 10px;
 }
 
 .stm-display-flex {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
-.stm-display-flex .progress-wrapper{
-    padding-top: 0px;
+.stm-display-flex .progress-wrapper {
+	padding-top: 0px;
 }
 
 .stm-lms-dashboard-certificate .progress-wrapper {
-    padding: 0px;
-    margin: 0px;
+	padding: 0px;
+	margin: 0px;
 }
 
 #stm-lms-dashboard .stm-lms-dashboard-certificate
 .lms-dashboard-table tr .student_progress {
-    width: 150px;
+	width: 150px;
 }
 
 #stm-lms-dashboard .stm-lms-dashboard-certificate .lms-dashboard-table tr td {
-    padding: 10px;
-    border-bottom: 0;
+	padding: 10px;
+	border-bottom: 0;
 }
 
 #stm-lms-dashboard .stm-lms-dashboard-certificate .lms-dashboard-table tr td .goToProgress {
-    opacity: 1;
-    visibility: visible;
+	opacity: 1;
+	visibility: visible;
 }
+
 #stm-lms-dashboard .stm-lms-dashboard-certificate .lms-dashboard-table tr .delete {
-    width: 20px;
-    text-align: right;
+	width: 20px;
+	text-align: right;
 }
 
 #stm-lms-dashboard .stm-lms-dashboard-certificate .lms-dashboard-table tr .delete i {
-    color: red;
-    cursor: pointer;
-    font-size: 16px;
+	color: red;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.certify label {
+	font-size: inherit;
+	font-weight: normal;
+	margin: 0;
+	text-align: center;
+	padding: 0;
 }

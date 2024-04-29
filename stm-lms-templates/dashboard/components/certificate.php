@@ -92,16 +92,18 @@ if ( isset( $_GET['page'] ) && $_GET['page'] != 'stm-lms-dashboard' ) {
 								<?php esc_html_e( 'Started', 'masterstudy-lms-learning-management-system' ); ?>
 							</div>
 						</th>
-						<th class="certificate time">
-							<div class="sort-certificate">
-								<?php esc_html_e( 'Certificates', 'masterstudy-lms-learning-management-system' ); ?>
-							</div>
-						</th>
+
 						<th class="certified time">
 							<div class="sort-certified">
 								<?php esc_html_e( 'Certified', 'slms' ); ?>
 							</div>
 						</th>
+						<th class="certificate time">
+							<div class="sort-certificate">
+								<?php esc_html_e( 'Certificates', 'masterstudy-lms-learning-management-system' ); ?>
+							</div>
+						</th>
+
 
 						<th class="progress_cell">
 							<div class="sort-table" @click="sortBy('progress')"
