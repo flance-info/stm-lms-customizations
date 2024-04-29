@@ -97,6 +97,11 @@ if ( isset( $_GET['page'] ) && $_GET['page'] != 'stm-lms-dashboard' ) {
 								<?php esc_html_e( 'Certificates', 'masterstudy-lms-learning-management-system' ); ?>
 							</div>
 						</th>
+						<th class="certified time">
+							<div class="sort-certified">
+								<?php esc_html_e( 'Certified', 'slms' ); ?>
+							</div>
+						</th>
 
 						<th class="progress_cell">
 							<div class="sort-table" @click="sortBy('progress')"
@@ -130,14 +135,17 @@ if ( isset( $_GET['page'] ) && $_GET['page'] != 'stm-lms-dashboard' ) {
 						<td class="email" v-html="list.student.email"></td>
 
 						<td v-html="list.ago" class="time"></td>
-						<td class="certificate">
-							<button>Certificate</button>
+						<td class="certify">
+							<label>
+								<input name="stm-certify" type="checkbox" value="" checked>
+								Certified
+							</label>
 						</td>
-						<td v-html="list.ago" class="time"></td>
 
 						<td class="certificate">
 							<button>Certificate</button>
 						</td>
+
 						<td class="progress_cell" @click="toUser(id, list.user_id)">
 							<div class="progress-wrapper">
 								<div class="progress-label">{{list.progress_percent}}%</div>
