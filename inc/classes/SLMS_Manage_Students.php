@@ -23,9 +23,14 @@ if(class_exists('STM_LMS_User_Manager_Course')) {
 		    $total_progress = STM_LMS_Lesson::get_total_progress( $user_id ?? null, $course_id );
 		    $course_passed  = false;
 			$passing_grade = intval( STM_LMS_Options::get_option( 'certificate_threshold', 70 ) );
+			$completion = get_user_meta( $user_id, "stm_lms_completion_course_{$course_id}", true );
 		    if ( ! empty( $total_progress['course']['progress_percent'] ) ) {
+
 			    $course_passed = $total_progress['course']['progress_percent'] >= $passing_grade;
 		    }
+			if ($completion == true){
+				$course_passed = true;
+			}
 
 		    return $course_passed;
 	    }
