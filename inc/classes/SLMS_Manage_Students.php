@@ -9,6 +9,29 @@ if(class_exists('STM_LMS_User_Manager_Course')) {
             add_action( 'wp_ajax_stm_lms_dashboard_get_course_students', array( $this, 'students' ) );
         }
 
+	    public function course_completions( $user_id, $course_id ) {
+		    $total_progress = STM_LMS_Lesson::get_total_progress( $user_id ?? null, $course_id );
+		    $course_passed  = false;
+			$passing_grade = intval( STM_LMS_Options::get_option( 'certificate_threshold', 70 ) );
+		    if ( ! empty( $total_progress['course']['progress_percent'] ) ) {
+			    $course_passed = $total_progress['course']['progress_percent'] >= $passing_grade;
+		    }
+
+		    return $course_passed;
+	    }
+
+		public function student_loop($data){
+			$new_data = [];
+			   foreach ($data as $key => $item) {
+                    if(!isset($item['student']) && !isset($item['student']['id'])) continue;
+                    $user_id = intval($item['student']['id']);
+					$course_id = intval($item['course_id']);
+					$item['completion'] = $this->course_completions($user_id, $course_id);
+					$new_data[] = $item;
+                }
+
+			   return $new_data;
+		}
         public function students()
         {
             check_ajax_referer( 'stm_lms_dashboard_get_course_students', 'nonce' );
@@ -19,7 +42,7 @@ if(class_exists('STM_LMS_User_Manager_Course')) {
             $data = array_reverse( array_map( array( $this, 'map_students' ), stm_lms_get_course_users( $course_id ) ) );
 
             $students = [];
-
+			$data = $this->student_loop($data);
             if(count($filter) && count($data)) {
                 foreach ($data as $key => $item) {
                     if(!isset($item['student']) && !isset($item['student']['id'])) continue;
@@ -45,6 +68,8 @@ if(class_exists('STM_LMS_User_Manager_Course')) {
             } else {
                 $data['students']     = $data;
             }
+
+
 
             $data['origin_title'] = get_the_title( $course_id );
             /* translators: %s: Course ID */

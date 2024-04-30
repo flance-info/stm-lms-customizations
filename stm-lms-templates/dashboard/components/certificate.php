@@ -155,7 +155,7 @@ if ( is_ms_lms_addon_enabled( 'certificate_builder' ) ) {
 						<td v-html="list.ago" class="time"></td>
 						<td class="certify">
 							<label>
-								<input name="stm-certify" type="checkbox" value="" checked>
+								<input name="stm-certify" type="checkbox" value="" :checked="list.completion ? true : false">
 								Certified
 							</label>
 						</td>
@@ -164,6 +164,7 @@ if ( is_ms_lms_addon_enabled( 'certificate_builder' ) ) {
 
 							<?php if ( is_ms_lms_addon_enabled( 'certificate_builder' ) ) : ?>
 								<a	href="#"
+									  v-if="list.completion"
 										class="stm_lms_course_completed_summary__certificate masterstudy_preview_certificate"
 										:data-id="id"
 									  	:data-user_id="list.user_id"
