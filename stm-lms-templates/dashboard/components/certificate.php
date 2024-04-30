@@ -3,6 +3,21 @@
 if ( isset( $_GET['page'] ) && $_GET['page'] != 'stm-lms-dashboard' ) {
 	return;
 }
+
+
+if ( is_ms_lms_addon_enabled( 'certificate_builder' ) ) {
+		wp_register_script( 'jspdf', STM_LMS_PRO_URL . '/assets/js/certificate-builder/jspdf.umd.js', array(), stm_lms_custom_styles_v(), false );
+		wp_enqueue_script( 'masterstudy_generate_certificate', STM_LMS_URL . '/assets/js/course-player/generate-certificate.js', array( 'jspdf', 'masterstudy_certificate_fonts' ), stm_lms_custom_styles_v(), true );
+		wp_localize_script(
+			'masterstudy_generate_certificate',
+			'course_certificate',
+			array(
+				'nonce'    => wp_create_nonce( 'stm_get_certificate' ),
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+			)
+		);
+}
+
 ?>
 <transition name="slide">
 
@@ -145,7 +160,17 @@ if ( isset( $_GET['page'] ) && $_GET['page'] != 'stm-lms-dashboard' ) {
 						</td>
 
 						<td class="certificate">
-							<button>Certificate</button>
+
+							<?php if ( is_ms_lms_addon_enabled( 'certificate_builder' ) ) : ?>
+								<a	href="#"
+										class="stm_lms_course_completed_summary__certificate masterstudy_preview_certificate"
+										:data-id="id"
+									  	:data-user_id="list.user_id"
+								>
+									<i class="fa fa-cloud-download-alt"></i>
+									<?php esc_html_e( 'Certificate', 'masterstudy-lms-learning-management-system' ); ?>
+								</a>
+							<?php endif; ?>
 						</td>
 
 						<td class="progress_cell" @click="toUser(id, list.user_id)">

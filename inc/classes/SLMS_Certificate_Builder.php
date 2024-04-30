@@ -46,6 +46,7 @@ class SLMS_Certificate_Builder {
         $id        = '';
 
 		$course_id = filter_input( INPUT_GET, 'course_id', FILTER_SANITIZE_NUMBER_INT );
+		$user_id = filter_input( INPUT_GET, 'user_id', FILTER_SANITIZE_NUMBER_INT );
 
 		$repo = $this->get_repository();
 		if ( $course_id ) {
@@ -77,7 +78,8 @@ class SLMS_Certificate_Builder {
             $orientation     = get_post_meta( $id, 'stm_orientation', true );
             $fields          = get_post_meta( $id, 'stm_fields', true );
             $image           = get_post_thumbnail_id( $id );
-            $current_user_id = get_current_user_id();
+            $current_user_id = (!empty($user_id))?$user_id:get_current_user_id();
+
 
             if ( empty( $fields ) ) {
                 $fields = array();
