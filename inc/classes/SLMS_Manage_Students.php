@@ -7,7 +7,17 @@ if(class_exists('STM_LMS_User_Manager_Course')) {
         {
             remove_all_actions( 'wp_ajax_stm_lms_dashboard_get_course_students' );
             add_action( 'wp_ajax_stm_lms_dashboard_get_course_students', array( $this, 'students' ) );
+			add_action( 'wp_ajax_stm_lms_dashboard_certify_user_from_course', array( $this, 'certify_user_from_course' ) );
+
         }
+
+	    public function certify_user_from_course() {
+		    check_ajax_referer( 'stm_lms_dashboard_delete_user_from_course', 'nonce' );
+		    $course_id = intval( $_GET['course_id'] );
+		    $user_id   = intval( $_GET['user_id'] );
+		    $checked   = sanitize_text_field( $_GET['checked'] );
+		    update_user_meta( $user_id, "stm_lms_completion_course_{$course_id}", $checked );
+	    }
 
 	    public function course_completions( $user_id, $course_id ) {
 		    $total_progress = STM_LMS_Lesson::get_total_progress( $user_id ?? null, $course_id );

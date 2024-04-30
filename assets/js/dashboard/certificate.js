@@ -121,6 +121,22 @@ stm_lms_components['certificate'] = {
                 _this.getStudents();
             });
         },
+        CheckedUserCourseCertificate: function CheckedUserCourseCertificate(event, course_id, user, key) {
+
+            var _this = this;
+
+            _this.$set(user, 'loading', true);
+            let isChecked = event.target.checked;
+
+            var url = stm_lms_ajaxurl + '?action=stm_lms_dashboard_certify_user_from_course';
+            url += '&course_id=' + course_id + '&user_id=' + user.user_id + '&nonce=' + stm_lms_nonces['stm_lms_dashboard_delete_user_from_course'];
+            url += '&checked=' + isChecked ;
+            _this.$http.get(url).then(function () {
+                _this.$set(user, 'loading', false);
+
+                _this.getStudents();
+            });
+        },
         studentAdded: function studentAdded() {
             this.getStudents();
         },
