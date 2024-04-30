@@ -7,7 +7,8 @@ if ( isset( $_GET['page'] ) && $_GET['page'] != 'stm-lms-dashboard' ) {
 
 if ( is_ms_lms_addon_enabled( 'certificate_builder' ) ) {
 		wp_register_script( 'jspdf', STM_LMS_PRO_URL . '/assets/js/certificate-builder/jspdf.umd.js', array(), stm_lms_custom_styles_v(), false );
-		wp_enqueue_script( 'masterstudy_generate_certificate', STM_LMS_URL . '/assets/js/course-player/generate-certificate.js', array( 'jspdf', 'masterstudy_certificate_fonts' ), stm_lms_custom_styles_v(), true );
+		wp_enqueue_script( 'masterstudy_generate_certificate', SLMS_URL. '/assets/js/course-player/generate-certificate.js', array( 'jspdf', 'masterstudy_certificate_fonts' ), stm_lms_custom_styles_v(), true );
+
 		wp_localize_script(
 			'masterstudy_generate_certificate',
 			'course_certificate',
