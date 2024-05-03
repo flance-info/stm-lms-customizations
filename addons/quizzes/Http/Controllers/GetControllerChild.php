@@ -5,11 +5,11 @@ namespace MasterStudy\Lms\Http\Controllers\Quiz;
 use MasterStudy\Lms\Http\Serializers\CustomFieldsSerializer;
 use MasterStudy\Lms\Http\WpResponseFactory;
 use MasterStudy\Lms\Repositories\QuestionRepository;
-use MasterStudy\Lms\Repositories\QuizRepository;
+use MasterStudy\Lms\Repositories\QuizRepositoryChild;
 
 class GetControllerChild {
 	public function __invoke( int $quiz_id ) {
-		$quiz = ( new QuizRepository() )->get( $quiz_id );
+		$quiz = ( new QuizRepositoryChild() )->get( $quiz_id );
 
 		if ( null === $quiz ) {
 			return WpResponseFactory::not_found();
