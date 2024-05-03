@@ -6,7 +6,7 @@ use MasterStudy\Lms\Enums\DurationMeasure;
 use MasterStudy\Lms\Enums\QuizStyle;
 use MasterStudy\Lms\Http\Controllers\CourseBuilder\UpdateCustomFieldsController;
 use MasterStudy\Lms\Http\WpResponseFactory;
-use MasterStudy\Lms\Repositories\QuizRepository;
+use MasterStudy\Lms\Repositories\QuizRepositoryChild;
 use MasterStudy\Lms\Utility\Question as QuestionUtility;
 use MasterStudy\Lms\Validation\Validator;
 
@@ -28,6 +28,7 @@ class CreateControllerChild {
 				'title'            => 'required|string',
 				'questions'        => 'array',
 				'custom_fields'    => 'array',
+				'quiz_attempts'    => 'nullable|integer',
 			)
 		);
 
@@ -39,7 +40,7 @@ class CreateControllerChild {
 
 		$data['questions'] = QuestionUtility::filter_allow_access( get_current_user_id(), $data['questions'] ?? array() );
 
-		$quiz_id = ( new QuizRepository() )->create( $data );
+		$quiz_id = ( new QuizRepositoryChild() )->create( $data );
 
 		if ( ! empty( $data['custom_fields'] ) ) {
 			$custom_fields = new UpdateCustomFieldsController();
