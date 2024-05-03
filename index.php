@@ -6,18 +6,18 @@ Description: STM LMS Customizations plugin for Next-U Academy
 Author: Stylemix
 Author URI: https://stylemix.net/
 Text Domain: slms
-Version: 1.0.4
+Version: 2.0.4
 */
 error_reporting( E_ALL );
 // Display errors in the browser
 ini_set( 'display_errors', 0 );
-define( 'SLMS_VERSION', '1.0.4' );
+define( 'SLMS_VERSION', '2.0.4' );
 define( 'SLMS_PATH', dirname( __FILE__ ) );
 define( 'SLMS_URL', plugin_dir_url( __FILE__ ) );
 $plugin_path = dirname( __FILE__ );
 
 require_once $plugin_path . '/inc/functions.php';
-
+require_once $plugin_path . '/addons.php';
 
 if ( ! is_textdomain_loaded( 'slms' ) ) {
     load_plugin_textdomain(

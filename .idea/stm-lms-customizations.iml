@@ -11,5 +11,8 @@
     <orderEntry type="module" module-name="masterstudy-elementor-widgets" />
     <orderEntry type="module" module-name="masterstudy-lms-learning-management-system" />
     <orderEntry type="module" module-name="masterstudy-lms-learning-management-system-pro" />
+    <orderEntry type="module" module-name="masterstudy-lms-learning-management-system" />
+    <orderEntry type="module" module-name="masterstudy-lms-learning-management-system" />
+    <orderEntry type="module" module-name="masterstudy-lms-learning-management-system-pro-old" />
   </component>
 </module>
