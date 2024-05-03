@@ -16,6 +16,7 @@ class QuizRepositoryChild {
 		'random_questions' => 'random_questions',
 		're_take_cut'      => 're_take_cut',
 		'style'            => 'quiz_style',
+		'quiz_attempts'    => 'nullable|integer',
 	);
 
 	private static $casts = array(
@@ -24,6 +25,7 @@ class QuizRepositoryChild {
 		'passing_grade'    => 'float',
 		'random_questions' => 'bool',
 		're_take_cut'      => 'float',
+		'quiz_attempts'    => 'nullable|integer',
 	);
 
 	public function create( array $data ): int {

@@ -58,15 +58,15 @@ export interface QuestionModel {
 export class QuizResource extends APIResource {
   create = (quizPayload: QuizModel) => {
     const data = quiz.to(quizPayload);
-    return this._provider.post('/quizzes', data);
+    return this._provider.post('/quizzeschild', data);
   };
   get = async (quizId: string) => {
-    const data = await this._provider.get(`/quizzes/${quizId}`);
+    const data = await this._provider.get(`/quizzeschild/${quizId}`);
     return { quiz: quiz.from(data.quiz), custom_fields: data.custom_fields };
   };
   update = (values: QuizModel) => {
     const data = quiz.to(values);
-    return this._provider.put(`/quizzes/${values.id}`, data);
+    return this._provider.put(`/quizzeschild/${values.id}`, data);
   };
   updateQuestions = (quizId: string, questions: (string|number)[]) =>
     this._provider.put(`/quizzes/${quizId}/questions`, { questions });
