@@ -6,14 +6,14 @@ use MasterStudy\Lms\Enums\DurationMeasure;
 use MasterStudy\Lms\Enums\QuizStyle;
 use MasterStudy\Lms\Http\Controllers\CourseBuilder\UpdateCustomFieldsController;
 use MasterStudy\Lms\Http\WpResponseFactory;
-use MasterStudy\Lms\Repositories\QuizRepository;
+use MasterStudy\Lms\Repositories\QuizRepositoryChild;
 use MasterStudy\Lms\Utility\Question as QuestionUtility;
 use MasterStudy\Lms\Validation\Validator;
 
 class UpdateControllerChild {
 
 	public function __invoke( int $quiz_id, \WP_REST_Request $request ) {
-		$repo = new QuizRepository();
+		$repo = new QuizRepositoryChild();
 
 		if ( ! $repo->exists( $quiz_id ) ) {
 			return WpResponseFactory::not_found();
@@ -34,6 +34,7 @@ class UpdateControllerChild {
 				'title'            => 'required|string',
 				'questions'        => 'array',
 				'custom_fields'    => 'array',
+				'quiz_attempts'    => 'nullable|integer',
 			)
 		);
 
