@@ -1,0 +1,1 @@
+export { Qa } from './qa';

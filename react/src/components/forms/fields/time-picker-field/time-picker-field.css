@@ -1,0 +1,7 @@
+.time-picker::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+.time-picker::-webkit-calendar-picker-indicator:hover {
+  cursor: pointer;
+}

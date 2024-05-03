@@ -1,0 +1,1 @@
+export { Shortcode } from './shortcode';

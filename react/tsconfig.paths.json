@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "~/assets/*": ["assets/*"],
+      "~/assets": ["assets"],
+      "~/common/*":  ["common/*"],
+      "~/common":  ["common"],
+      "~/components/*": ["components/*"],
+      "~/components": ["components"],
+      "~/helpers/*":  ["helpers/*"],
+      "~/helpers":  ["helpers"],
+      "~/mirage/*": ["mirage/*"],
+      "~/mirage": ["mirage"],
+      "~/models/*":  ["models/*"],
+      "~/models":  ["models"],
+      "~/services/*":  ["services/*"],
+      "~/services":  ["services"],
+      "~/styles/*": ["styles/*"],
+      "~/styles": ["styles"]
+    }
+  }
+}

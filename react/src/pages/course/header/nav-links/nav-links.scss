@@ -1,0 +1,25 @@
+.link, .active-link {
+    padding: 19.5px 20px;
+    font-size: 14px;
+    border-bottom: 3px solid;
+    align-self: center;
+    maxHeight: 60px;
+    line-height: 18px;
+}
+
+.link {
+    color: #B3BAC2;
+    border-color: transparent;
+}
+
+.link:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.active-link {
+    color: white !important;
+    border-color: #227AFF;
+    background: rgba(255, 255, 255, 0.1);
+}
+

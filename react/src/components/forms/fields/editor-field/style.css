@@ -1,0 +1,7 @@
+.mce-btn.mce-active .mce-ico {
+    color: #001931;
+}
+
+.mce-btn.mce-active:hover .mce-ico {
+    color: #001931;
+}

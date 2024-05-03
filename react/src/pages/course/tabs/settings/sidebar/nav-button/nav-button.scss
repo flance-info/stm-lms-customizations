@@ -1,0 +1,28 @@
+.navLink, .disabledNavLink {
+    max-height: 40px;
+    min-width: 250px;
+    font-size: 14px;
+    color: #4D5E6F;
+    text-align: left;
+    padding: 10px;
+}
+
+.navLink:hover {
+    cursor: pointer;
+    color: #001931;
+}
+
+.disabledNavLink:hover {
+    color: #4D5E6F;
+    cursor: not-allowed;
+}
+
+.activeNavLink {
+    background: white;
+    p {
+        color: #001931;
+    }
+    span {
+        color: #227AFF;
+    }
+}

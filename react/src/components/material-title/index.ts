@@ -1,0 +1,1 @@
+export { MaterialTitle } from './material-title';

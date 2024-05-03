@@ -1,0 +1,7 @@
+.date-picker::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+.date-picker::-webkit-calendar-picker-indicator:hover {
+  cursor: pointer;
+}
