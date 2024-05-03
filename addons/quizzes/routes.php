@@ -3,7 +3,7 @@
 $router->post(
 	'/quizzeschild',
 	\MasterStudy\Lms\Http\Controllers\Quiz\CreateControllerChild::class,
-	\MasterStudy\Lms\Routing\Swagger\Routes\Quiz\CreateChild::class
+	\MasterStudy\Lms\Routing\Swagger\Routes\Quiz\Create::class
 );
 
 $router->get(
@@ -15,5 +15,5 @@ $router->get(
 $router->put(
 	'/quizzeschild/{quiz_id}',
 	\MasterStudy\Lms\Http\Controllers\Quiz\UpdateControllerChild::class,
-	\MasterStudy\Lms\Routing\Swagger\Routes\Quiz\UpdateChild::class
+	\MasterStudy\Lms\Routing\Swagger\Routes\Quiz\Update::class
 );
