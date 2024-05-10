@@ -2,7 +2,7 @@
 /**
  * @var $course_id
  */
-
+use MasterStudy\Lms\Pro\addons\CourseBundle\Repository\CourseBundleRepository;
 $bundle_point_price = (int)get_post_meta($course_id, 'bundle_point_price', true);
 
 stm_lms_register_script( 'buy-button' );
@@ -11,10 +11,13 @@ if ( !empty( $bundle_point_price ) ) {
     slms_register_script( 'bundles/bundles_buy' );
 }
 stm_lms_register_style( 'buy-button-mixed' );
+$bundle_price  = $bundle_courses_price = '';
+
+	$bundle_price         = CourseBundleRepository::get_bundle_price( $course_id );
+$bundle_courses_price = CourseBundleRepository::get_bundle_courses_price( $course_id );
 
 
-$bundle_price         = get_post_meta( $course_id, STM_LMS_My_Bundle::bundle_price_key(), true );
-$bundle_courses_price = STM_LMS_Course_Bundle::get_bundle_courses_price( $course_id );
+
 $button_attributes    = ! is_user_logged_in()
     ?
     apply_filters(

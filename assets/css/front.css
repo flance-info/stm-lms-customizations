@@ -7,3 +7,15 @@
 .stm-lms-wrapper.stm_lms_udemy_course .stm_lms_udemy_bar .single_product_after_title {
     align-items: start;
 }
+.single-stm-course-bundles
+.stm-lms-buy-buttons .btn:not(.start-course).btn_big {
+    display: flex;
+    min-height: 60px;
+    margin-bottom: 8px;
+    padding: 20px 16px 19px;
+    font-size: 15px;
+    width: 100%;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+}

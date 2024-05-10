@@ -10,7 +10,7 @@ Version: 2.0.4
 */
 error_reporting( E_ALL );
 // Display errors in the browser
-ini_set( 'display_errors', 0 );
+//ini_set( 'display_errors', 1 );
 define( 'SLMS_VERSION', '2.0.4' );
 define( 'SLMS_PATH', dirname( __FILE__ ) );
 define( 'SLMS_URL', plugin_dir_url( __FILE__ ) );
