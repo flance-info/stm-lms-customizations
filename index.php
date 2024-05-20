@@ -8,7 +8,7 @@ Author URI: https://stylemix.net/
 Text Domain: slms
 Version: 2.0.4
 */
-error_reporting( E_ALL );
+//error_reporting( E_ALL );
 // Display errors in the browser
 //ini_set( 'display_errors', 1 );
 define( 'SLMS_VERSION', '2.0.4' );
