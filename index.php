@@ -47,4 +47,23 @@ function custom_logger($message) {
     file_put_contents($log_file, $log_message, FILE_APPEND);
 }
 
+function check_loaded_language_files() {
+
+	$locale       = determine_locale();
+	$mo_file_path = MS_LMS_PATH . '/languages/masterstudy-lms-learning-management-system-' . $locale . '.mo';
+	// Log the path of the .mo file being checked
+	error_log( "Checking translation file: " . $mo_file_path );
+	if ( file_exists( $mo_file_path ) ) {
+		load_textdomain( 'masterstudy-lms-learning-management-system', $mo_file_path );
+		error_log( "Translation file loaded: " . $mo_file_path );
+	} else {
+		error_log( "Translation file not found: " . $mo_file_path );
+	}
+
+
+}
+
+add_action( 'init', 'check_loaded_language_files' );
+
+
 
